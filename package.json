@@ -4,13 +4,24 @@
   "description": "As part of Manchester Codes final project we created a community language app called Conversa (meaning 'talk' in Portuguese). The purpose of the app is to connect users within a local community who want to practise a second language or want to maintain a native language (i.e. refugee living in UK)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "node utils/create-datebase.js",
+    "start": "nodemon -r dotenv/config index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.1",
     "eslint": "^8.21.0",
-    "eslint-plugin-react": "^7.30.1"
+    "eslint-plugin-react": "^7.30.1",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3"
   }
 }
