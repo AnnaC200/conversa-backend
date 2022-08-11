@@ -5,4 +5,10 @@ const router = Router()
 
 router.post("/", userController.create)
 
+router.get('/', userController.read)
+
+router.get('/:userId', userController.readById)
+
+router.patch('/:userId', userController.update)
+
 module.exports = router

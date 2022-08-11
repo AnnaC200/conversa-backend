@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // require the promise version of mysql2
 const mysql = require('mysql2/promise');
 
@@ -5,6 +6,7 @@ const mysql = require('mysql2/promise');
 const path = require('path');
 
 // extract any command line arguments from argv
+// eslint-disable-next-line no-undef
 const args = process.argv.slice(2)[0];
 
 // use args to determine if .env or .env.test should be loaded
