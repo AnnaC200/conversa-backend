@@ -12,3 +12,4 @@ router.get('/:userId', userController.readById)
 router.patch('/:userId', userController.update)
 
 module.exports = router
+

@@ -33,18 +33,25 @@ const setUpDatabase = async () => {
 
     // create the database if it doesn't already exist
     await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
-    await db.query(`USE ${DB_NAME}`)
-    await db.query(`CREATE TABLE IF NOT EXISTS user (
-        id INT PRIMARY KEY AUTO_INCREMENT, 
-        firstName VARCHAR(255) NOT NULL,
-        lastName VARCHAR(255) NOT NULL,
-        location VARCHAR(255) NOT NULL,
-        age INT NOT NULL,
-        nativeLanguage VARCHAR(255) NOT NULL,
-        desiredLanguages VARCHAR(255) NOT NULL,
-        aboutMe TEXT NOT NULL,
-        email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL)`)
+    await db.query(`USE ${DB_NAME}`);
+    await db.query(`CREATE TABLE IF NOT EXISTS language(
+      id INT PRIMARY KEY AUTO_INCREMENT,
+      language VARCHAR(255) NOT NULL)`);
+    await db.query(`CREATE TABLE IF NOT EXISTS competency(
+      id INT PRIMARY KEY AUTO_INCREMENT,
+      competency VARCHAR(255) NOT NULL)`);
+    await db.query(`CREATE TABLE user (
+      id INT PRIMARY KEY AUTO_INCREMENT,  
+      firstName VARCHAR(255) NOT NULL,
+      lastName VARCHAR(255) NOT NULL,
+      age INT NOT NULL,
+      aboutMe TEXT NOT NULL,
+      email VARCHAR(255) NOT NULL UNIQUE,
+      password VARCHAR(255) NOT NULL,
+      location VARCHAR(255) NOT NULL,
+      nativeLangId INT NOT NULL, FOREIGN KEY (nativeLangId) REFERENCES language(id),
+      desiredLangId INT NOT NULL, FOREIGN KEY (desiredLangId) REFERENCES language(id),
+      desiredLangCompId INT NOT NULL, FOREIGN KEY (desiredLangCompId) REFERENCES competency(id))`);
     db.close();
   } catch (err) {
     // if something goes wrong, console.log the error and the current environment variables

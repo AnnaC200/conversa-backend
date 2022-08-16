@@ -5,26 +5,28 @@ exports.create = async (req, res) => {
   const {
     firstName,
     lastName,
-    location,
     age,
-    nativeLanguage,
-    desiredLanguages,
     aboutMe,
     email,
     password,
+    location, 
+    nativeLangId,
+    desiredLangId,
+    desiredLangCompId
   } = req.body;
 
   try {
     const [result] = await db.query(`INSERT INTO user (
-          firstName, 
-          lastName, 
-          location, 
-          age,
-          nativeLanguage,
-          desiredLanguages,
-          aboutMe,
-          email,
-          password) VALUES ('${firstName}', '${lastName}', '${location}', '${age}', '${nativeLanguage}', '${desiredLanguages}', '${aboutMe}', '${email}', '${password}')`);
+      firstName,
+      lastName,
+      age,
+      aboutMe,
+      email,
+      password,
+      location, 
+      nativeLangId,
+      desiredLangId,
+      desiredLangCompId) VALUES ('${firstName}', '${lastName}', '${age}', '${aboutMe}', '${email}', '${password}', '${location}', '${nativeLangId}', '${desiredLangId}', '${desiredLangCompId}')`);
 
     res.status(201).send({id:result.insertId});
   } catch (err) {
