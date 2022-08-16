@@ -1,8 +1,8 @@
-const { User } = require('../models')
+const { User, Language } = require('../models')
 const user = require('../models/user')
 
 const createUser = async (req, res) => {
-    const { firstName, lastName, age, location, email, hashed_password, about_me } = req.body
+    const { firstName, lastName, age, location, email, hashedPassword, aboutMe } = req.body
 
     try{
         const createdUser = await User.create ({
@@ -11,9 +11,12 @@ const createUser = async (req, res) => {
             age, 
             location, 
             email, 
-            hashed_password, 
-            about_me
+            hashedPassword, 
+            aboutMe
         })
+
+        const users = await User.findAll({ include: Language });
+        console.log(JSON.stringify(users, null, 2));
 
         return res.status(201).json(createdUser)
     } catch(e) {
@@ -33,7 +36,7 @@ const findUserByPk = async (req, res) => {
         return res.json(foundUser)
     } catch(e) {
         console.error(e)
-        return res.status(500).json({ message: "error find user"})
+        return res.status(500).json({ message: "error finding user"})
     }
 }
 
@@ -66,5 +69,6 @@ const updateUser = async (req, res) => {
 module.exports = {
     createUser,
     findUserByPk,
-    findAllUsers
+    findAllUsers,
+   
 }

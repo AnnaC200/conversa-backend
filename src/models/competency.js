@@ -1,8 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const schema = {
-        competency: DataTypes.STRING,
-        
-    }
+        competency: {
+        type: DataTypes.STRING,
+        allowNull: false,  
+        }
+    };
 
-    return sequelize.define ( 'Competency', schema)
-}
+    return sequelize.define ('Competency', schema)
+};

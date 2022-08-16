@@ -1,7 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const schema = {
-    language: DataTypes.STRING,
+    language: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   };
-
+  
   return sequelize.define('Language', schema);
 };

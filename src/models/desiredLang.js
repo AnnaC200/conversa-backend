@@ -3,5 +3,5 @@ module.exports = (sequelize) => {
         
     }
 
-    return sequelize.define ( 'DesiredLang', schema)
+    return sequelize.define ('DesiredLang', schema)
 }

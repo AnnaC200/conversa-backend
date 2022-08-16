@@ -21,19 +21,21 @@ const setUpDatabase = () => {
     const DesiredLang = DesiredLangModel(connection, Sequelize)
     const Connection = ConnectionModel(connection, Sequelize)
 
-    User.belongsTo(Language)
-    DesiredLang.belongsTo(User)
-    DesiredLang.belongsTo(Language)
-    DesiredLang.belongsTo(Competency)
-    Connection.belongsTo(User)
-    Connection.belongsTo(User)
+    Language.hasOne(User, { foreignKey: 'nativeLangId' });
+    User.belongsTo(Language);
+
+    DesiredLang.belongsTo(User);
+    DesiredLang.belongsTo(Language, { foreignKey: 'DesiredLang' });
+    DesiredLang.belongsTo(Competency, { foreignKey: 'CompId' });
+    Connection.belongsTo(User, { as: 'user1' })
+    Connection.belongsTo(User, { as: 'user2' })
+    Connection.belongsTo(User, { as: 'user3' })
 
   
     connection.sync({ alter: true });
     return { User, Language, Competency, DesiredLang, Connection };
 
-    // const users = await User.findAll({ includes: Language});
-    // console.log(JSON.stringify(users, null, 2));
+   
 };
 
 module.exports = setUpDatabase();
