@@ -1,5 +1,6 @@
 const { User, Language } = require('../models')
 const user = require('../models/user')
+const language = require('../models/language')
 
 const createUser = async (req, res) => {
     const { firstName, lastName, age, location, email, hashedPassword, aboutMe } = req.body
@@ -15,7 +16,7 @@ const createUser = async (req, res) => {
             aboutMe
         })
 
-        const users = await User.findAll({ include: Language });
+        const users = await User.findAll({ include: language });
         console.log(JSON.stringify(users, null, 2));
 
         return res.status(201).json(createdUser)
@@ -29,7 +30,7 @@ const findUserByPk = async (req, res) => {
     const { userId } = req.params
 
     try {
-        const foundUser = await User.findByPK(userId)
+        const foundUser = await User.findByPk(userId)
 
         if(!foundUser) return res.status(404).json({ message: "could not find user with that ID"})
 
@@ -52,14 +53,16 @@ const findAllUsers = async (req, res) => {
         console.error(e)
         return res.status(500).json({ message: "error find all user"})
     }
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
 const updateUser = async (req, res) => {
     const { userId } = req.params
 
     try {
-        const updatedUser = User.update({ message: "could not update User" })
+        const updatedUser = await User.update({ location: new Location()}, { where: { location: userId }})
 
+        return res.json(updatedUser)
+    
     } catch(e) {
         console.error(e)
         return res.status(500).json({ message: "error updating user"})      
@@ -70,5 +73,5 @@ module.exports = {
     createUser,
     findUserByPk,
     findAllUsers,
-   
+    updateUser
 }
