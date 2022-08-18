@@ -5,6 +5,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   };
-  
+
   return sequelize.define('Language', schema);
 };
