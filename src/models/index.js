@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const Sequelize = require('sequelize')
 const UserModel = require ('./user')
 const LanguageModel = require('./language')
@@ -5,14 +6,16 @@ const CompetencyModel = require('./competency')
 const DesiredLangModel = require('./desiredLang')
 const ConnectionModel = require('./connection')
 
-const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DIALECT } = process.env;
+const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DIALECT, CLEARDB_DATABASE_URL } = process.env;
 
 const setUpDatabase = () => {
-    const connection = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+    const connection = CLEARDB_DATABASE_URL ?
+    new Sequelize (CLEARDB_DATABASE_URL) :
+    new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
         host: DB_HOST,
         port: DB_PORT,
         dialect: DB_DIALECT,
-        logging: true
+        logging: false
     })
 
     const User = UserModel(connection, Sequelize)
