@@ -1,22 +1,20 @@
 const { User } = require('../models');
 
 const findUser = async (req, res) => {
-    const { location, desiredLang } = req.body;
+    const { location, desiredLangId } = req.body;
 
     try {
-        const createdConnection = await User.findAll({
-            location,
-            desiredLang,
+        const matchingUsers = await User.findAll({
             where: {
-                location: 'Leeds',
-                desiredLang: 1
+                location: location,
+                desiredLangId: desiredLangId
             }
         })
 
-        return res.status(createdConnection)
+        return res.status(200).json(matchingUsers)
     } catch(e) {
         console.error(e);
-        return res.status(500).json({ message: 'error creating connections'})
+        return res.status(500).json({ message: 'error finding connections'})
     }
 }
 

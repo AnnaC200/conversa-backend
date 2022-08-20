@@ -34,7 +34,7 @@ const setUpDatabase = () => {
     Connection.belongsTo(User, { as: 'user2' })
     Connection.belongsTo(User, { as: 'user3' })
   
-    connection.sync({ alter: true }); 
+    connection.sync({ alter: true, force: true }); 
     return { User, Language, Competency, DesiredLang, Connection };
 
 };
