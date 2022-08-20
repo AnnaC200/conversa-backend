@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const app = require('./src/app');
 
 const APP_PORT = process.env.PORT || 4000;
