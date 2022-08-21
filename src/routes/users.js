@@ -8,7 +8,8 @@ const {
   updateUser,
   updateUserLang,
   updateUserDesiredLang,
-  updateUserComp
+  updateUserComp,
+  deleteUser
 } = require('../controllers/users');
 
 userRouter.post('/users', createUser);
@@ -18,5 +19,6 @@ userRouter.patch('/users/:userId', updateUser);
 userRouter.patch('/users/:userId/nativeLang', updateUserLang);
 userRouter.patch('/users/:userId/desiredLang', updateUserDesiredLang);
 userRouter.patch('/users/:userId/desiredLang/competency', updateUserComp);
+userRouter.delete('/users/:userId', deleteUser);
 
 module.exports = userRouter;

@@ -122,6 +122,31 @@ const updateUserComp = async (req, res) => {
   }
 };
 
+const deleteUser = async (res, req) => {
+  const { userId } = req.params;
+  const deletedRows = await User.destory({ where: { id: userId } })
+
+  if (deletedRows){
+    res.status(204).send();
+  } else {
+    res.status(400).send({ message: "error deleting user" })
+  }
+}
+
+
+//   try {
+//     const deletedUser = await User.destroy(
+//       { where: { id: userId }}
+//     );
+
+//     return res.json(deletedUser);
+
+//   } catch (err) {
+//     console.error(err)
+
+//     return res.status(500).json({ message: "could not delete user with that ID"})
+//   }
+// }
 
 module.exports = {
   createUser,
@@ -130,5 +155,6 @@ module.exports = {
   updateUser,
   updateUserLang,
   updateUserDesiredLang,
-  updateUserComp
+  updateUserComp,
+  deleteUser
 };
