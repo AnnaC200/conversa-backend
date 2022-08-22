@@ -22,5 +22,6 @@ userRouter.delete('/users/:userId', deleteUser);
 userRouter.patch('/users/:userId/nativeLang', updateUserLang);
 userRouter.patch('/users/:userId/desiredLang', updateUserDesiredLang);
 userRouter.patch('/users/:userId/desiredLang/competency', updateUserComp);
+userRouter.delete('/users/:userId', deleteUser);
 
 module.exports = userRouter;

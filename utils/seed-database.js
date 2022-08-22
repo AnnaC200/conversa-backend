@@ -49,18 +49,16 @@ const setUpDatabase = async () => {
     // so we don't get any duplicates
     await db.query('DELETE FROM Competencies');
     // reset IDs for primary key back to one so competencies always have same IDs
-    await db.query('ALTER TABLE Competencies AUTO_INCREMENT = 1;')
+    await db.query('ALTER TABLE Competencies AUTO_INCREMENT = 1;');
 
     // seed the competencies table
-    let competenciesSeedQuery = ''
-    competenciesSeedQuery += 'INSERT INTO Competencies\n'
-    competenciesSeedQuery += '(competency, createdAt, updatedAt)\n'
-    competenciesSeedQuery += 'VALUES\n'
-    competenciesSeedQuery += "('Beginner',NOW(), NOW()),\n"
-    competenciesSeedQuery += "('Intermediate',NOW(), NOW()),\n"
-    competenciesSeedQuery += "('Advanced',NOW(), NOW())\n"
-    
-
+    let competenciesSeedQuery = '';
+    competenciesSeedQuery += 'INSERT INTO Competencies\n';
+    competenciesSeedQuery += '(competency, createdAt, updatedAt)\n';
+    competenciesSeedQuery += 'VALUES\n';
+    competenciesSeedQuery += "('Beginner',NOW(), NOW()),\n";
+    competenciesSeedQuery += "('Intermediate',NOW(), NOW()),\n";
+    competenciesSeedQuery += "('Advanced',NOW(), NOW())\n";
 
     await db.query(competenciesSeedQuery);
 
@@ -68,34 +66,34 @@ const setUpDatabase = async () => {
     // so we don't get any duplicates
     await db.query('DELETE FROM Languages');
     // reset IDs for primary key back to one so competencies always have same IDs
-    await db.query('ALTER TABLE Languages AUTO_INCREMENT = 1;')
+    await db.query('ALTER TABLE Languages AUTO_INCREMENT = 1;');
 
     // seed the languages table
-    let languagesSeedQuery = ''
-    languagesSeedQuery += 'INSERT INTO Languages\n'
-    languagesSeedQuery += '(language, createdAt, updatedAt)\n'
-    languagesSeedQuery += 'VALUES\n'
-    languagesSeedQuery += "('English',NOW(), NOW()),\n"
-    languagesSeedQuery += "('French',NOW(), NOW()),\n"
-    languagesSeedQuery += "('German',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Spanish',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Italian',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Greek',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Russian',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Japanese',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Welsh',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Urdu',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Polish',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Ukrainian',NOW(), NOW()),\n"
-    languagesSeedQuery += "('Cantonese',NOW(), NOW())\n"
-    
+    let languagesSeedQuery = '';
+    languagesSeedQuery += 'INSERT INTO Languages\n';
+    languagesSeedQuery += '(language, createdAt, updatedAt)\n';
+    languagesSeedQuery += 'VALUES\n';
+    languagesSeedQuery += "('English',NOW(), NOW()),\n";
+    languagesSeedQuery += "('French',NOW(), NOW()),\n";
+    languagesSeedQuery += "('German',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Spanish',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Italian',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Greek',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Russian',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Japanese',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Welsh',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Urdu',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Polish',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Ukrainian',NOW(), NOW()),\n";
+    languagesSeedQuery += "('Cantonese',NOW(), NOW())\n";
+
     await db.query(languagesSeedQuery);
 
-       // clear out any records in the desiredLangs table
+    // clear out any records in the desiredLangs table
     // so we don't get any duplicates
     await db.query('DELETE FROM DesiredLangs');
     // reset IDs for primary key back to one so desiredlangs always have same IDs
-    await db.query('ALTER TABLE DesiredLangs AUTO_INCREMENT = 1;')
+    await db.query('ALTER TABLE DesiredLangs AUTO_INCREMENT = 1;');
 
     // seed the languages table
     let desiredLangsSeedQuery = ''

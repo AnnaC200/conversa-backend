@@ -141,27 +141,19 @@ const updateUserComp = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const { userId } = req.params;
-
   try {
-    const userToDelete = await User.findOne({where: { id: userId }});
-
-    await userToDelete.destroy();
-
+    const userToDelete = await User.destroy({where: { id: userId }});
     if (!userToDelete)
-
       return res
         .status(404)
-        .json({ message: 'could not find user with that ID so could not be deleted.' });
-
+        .json({ message: 'could not find delete with that ID' });
     return res.status(201).json(userToDelete);
-
   } catch (e) {
-
     console.error(e);
     return res.status(500).json({ message: 'error deleting user' });
-
   }
 };
+
 
 module.exports = {
   createUser,
