@@ -8,7 +8,8 @@
     "prestart": "node utils/create-datebase.js",
     "start": "node index.js", 
     "start:dev": "nodemon -r dotenv/config index.js",
-    "seed-db": "node utils/seed-database.js"
+    "seed-db:local": "node -r dotenv/config utils/seed-database.js",
+    "seed-db:deploy": "node utils/seed-database.js"
   },
   "keywords": [],
   "author": "",

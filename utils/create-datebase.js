@@ -27,11 +27,11 @@ if (args === "test") {
  
 
 // destructure environment variables from process.env
-const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT, CLEARDB_DATABASE_URL } = process.env;
+const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT, DB_DIALECT, CLEARDB_DATABASE_URL } = process.env;
 
 // This asyncronous function will run before app
 const setUpDatabase = async () => {
-  
+
   try {
     // connect to the database
     const db = CLEARDB_DATABASE_URL ?
@@ -41,6 +41,7 @@ const setUpDatabase = async () => {
       user: DB_USER,
       password: DB_PASSWORD,
       port: DB_PORT,
+      dialect: DB_DIALECT
     });
   
     // create the database if it doesn't already exist
@@ -59,6 +60,7 @@ const setUpDatabase = async () => {
       DB_USER,
       DB_HOST,
       DB_PORT,
+      DB_DIALECT
     });
     console.log(err);
   }

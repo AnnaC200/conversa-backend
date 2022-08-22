@@ -36,7 +36,7 @@ const findUserByPk = async (req, res) => {
         .status(404)
         .json({ message: 'could not find user with that ID' });
 
-    return res.json(foundUser);
+    return res.status(201).json(foundUser);
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: 'error finding user' });
@@ -56,6 +56,23 @@ const findAllUsers = async (req, res) => {
     return res.status(500).json({ message: 'error find all user' });
   }
 };
+
+const findUsersByName = async (req, res) => {
+    const firstName = req.params.firstName
+    
+    try {
+      const foundUsersByName = await User.findAll({
+          where: { firstName }
+      })
+
+      return res.json(foundUsersByName)
+
+    } catch (err) {
+
+      console.error(err)
+      return res.status(500).json({ message: "could not find user by firstName "})
+    }
+}
 
 
 const updateUser = async (req, res) => {
@@ -122,35 +139,34 @@ const updateUserComp = async (req, res) => {
   }
 };
 
-const deleteUser = async (res, req) => {
+const deleteUser = async (req, res) => {
   const { userId } = req.params;
-  const deletedRows = await User.destory({ where: { id: userId } })
 
-  if (deletedRows){
-    res.status(204).send();
-  } else {
-    res.status(400).send({ message: "error deleting user" })
+  try {
+    const userToDelete = await User.findOne({where: { id: userId }});
+
+    await userToDelete.destroy();
+
+    if (!userToDelete)
+
+      return res
+        .status(404)
+        .json({ message: 'could not find user with that ID so could not be deleted.' });
+
+    return res.status(201).json(userToDelete);
+
+  } catch (e) {
+
+    console.error(e);
+    return res.status(500).json({ message: 'error deleting user' });
+
   }
-}
-
-
-//   try {
-//     const deletedUser = await User.destroy(
-//       { where: { id: userId }}
-//     );
-
-//     return res.json(deletedUser);
-
-//   } catch (err) {
-//     console.error(err)
-
-//     return res.status(500).json({ message: "could not delete user with that ID"})
-//   }
-// }
+};
 
 module.exports = {
   createUser,
   findUserByPk,
+  findUsersByName,
   findAllUsers,
   updateUser,
   updateUserLang,
