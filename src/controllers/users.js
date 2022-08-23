@@ -1,8 +1,18 @@
 const { User } = require('../models');
 
 const createUser = async (req, res) => {
-  const { firstName, lastName, age, location, email, hashedPassword, aboutMe } =
-    req.body;
+  const {
+    firstName,
+    lastName,
+    age,
+    location,
+    email,
+    hashedPassword,
+    aboutMe,
+    nativeLangId,
+    desiredLangId,
+    desiredLangCompetencyId,
+  } = req.body;
 
   try {
     const createdUser = await User.create({
@@ -13,9 +23,9 @@ const createUser = async (req, res) => {
       email,
       hashedPassword,
       aboutMe,
-      // native,
-      // desiredLang,
-      // desiredLangComp
+      nativeLangId,
+      desiredLangId,
+      desiredLangCompetencyId,
     });
 
     return res.status(201).json(createdUser);
@@ -43,10 +53,9 @@ const findUserByPk = async (req, res) => {
   }
 };
 
-
 const findAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll();
 
     if (!users.length)
       return res.status(404).json({ message: 'could not find all users' });
@@ -58,22 +67,21 @@ const findAllUsers = async (req, res) => {
 };
 
 const findUsersByName = async (req, res) => {
-    const firstName = req.params.firstName
-    
-    try {
-      const foundUsersByName = await User.findAll({
-          where: { firstName }
-      })
+  const firstName = req.params.firstName;
 
-      return res.json(foundUsersByName)
+  try {
+    const foundUsersByName = await User.findAll({
+      where: { firstName },
+    });
 
-    } catch (err) {
-
-      console.error(err)
-      return res.status(500).json({ message: "could not find user by firstName "})
-    }
-}
-
+    return res.json(foundUsersByName);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: 'could not find user by firstName ' });
+  }
+};
 
 const updateUser = async (req, res) => {
   const { userId } = req.params;
@@ -81,7 +89,7 @@ const updateUser = async (req, res) => {
   try {
     const updatedUser = await User.update(
       { location: req.body.location },
-      { where: { id: userId }}
+      { where: { id: userId } }
     );
 
     return res.json(updatedUser);
@@ -97,7 +105,7 @@ const updateUserLang = async (req, res) => {
   try {
     const updatedUser = await User.update(
       { nativeLangId: req.body.nativeLangId },
-      { where: { id: userId }}
+      { where: { id: userId } }
     );
 
     return res.json(updatedUser);
@@ -113,7 +121,7 @@ const updateUserDesiredLang = async (req, res) => {
   try {
     const updatedUser = await User.update(
       { desiredLangId: req.body.desiredLangId },
-      { where: { id: userId }}
+      { where: { id: userId } }
     );
 
     return res.json(updatedUser);
@@ -129,20 +137,22 @@ const updateUserComp = async (req, res) => {
   try {
     const updatedUser = await User.update(
       { desiredLangCompetencyId: req.body.desiredLangCompetencyId },
-      { where: { id: userId }}
+      { where: { id: userId } }
     );
 
     return res.json(updatedUser);
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ message: 'error updating desired language competency' });
+    return res
+      .status(500)
+      .json({ message: 'error updating desired language competency' });
   }
 };
 
 const deleteUser = async (req, res) => {
   const { userId } = req.params;
   try {
-    const userToDelete = await User.destroy({where: { id: userId }});
+    const userToDelete = await User.destroy({ where: { id: userId } });
     if (!userToDelete)
       return res
         .status(404)
@@ -154,7 +164,6 @@ const deleteUser = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createUser,
   findUserByPk,
@@ -164,5 +173,5 @@ module.exports = {
   updateUserLang,
   updateUserDesiredLang,
   updateUserComp,
-  deleteUser
+  deleteUser,
 };
