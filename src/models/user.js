@@ -29,18 +29,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    // native: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
-    // desiredLang: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
-    // desiredLangComp: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
+    nativeLangId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false,
+    },
+    desiredLangId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false,
+    },
+    desiredLangCompetencyId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false,
+    },
   };
 
   return sequelize.define('User', schema);
